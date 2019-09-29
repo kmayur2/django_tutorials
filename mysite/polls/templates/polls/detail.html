@@ -1,0 +1,23 @@
+{% if question %}
+	<p><a href="{% url 'polls:index' %}">Back to all questions</a></p>
+	<h1>Question {{ question.id }} </h1>
+	<h2> {{ question.question_text }}</h2>
+
+	{% if 0 == question.choice_set.count %}
+		<p> No choices for this question </p>
+	{% else %}
+		<ul>
+		{% for choice in question.choice_set.all %}
+		   <li>{{ choice.choice_text }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	
+
+	<p><a href="{% url 'polls:vote' question.id %}" >Click here</a> to vote for question {{ question.id }}</p>
+	<p><a href="{% url 'polls:results' question.id %}">Click here</a> to see result for question {{ question.id }}</p>
+{% else %}
+	<p> Invalid question </p>
+{% endif %}
+
+
